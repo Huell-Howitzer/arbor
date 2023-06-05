@@ -1,6 +1,6 @@
 # src/arbor/__init__.py
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = "Ryan M. Howell"
 __email__ = "rmhowell@protonmail.com"
 

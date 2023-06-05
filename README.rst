@@ -1,8 +1,24 @@
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+   :target: https://github.com/psf/black
+
+.. image:: https://img.shields.io/badge/python-3.10-blue.svg
+   :target: https://www.python.org/downloads/release/python-3100/
+
+.. image:: https://img.shields.io/badge/License-MIT-yellow.svg
+   :target: https://opensource.org/licenses/MIT
+
+.. image:: https://codecov.io/gh/huell-howitzer/arbor/branch/main/graph/badge.svg
+   :target: https://codecov.io/gh/huell-howitzer/arbor
+
+
 ===================
 Arbor - Tree Maker
 ===================
 
-Arbor is a powerful and flexible Python package that facilitates the creation of directory trees and file structures from a plain text file. It simplifies the management of complex directory structures, providing a clear and intuitive way to create, manipulate, and visualize them.
+Arbor is a powerful and flexible Python package that facilitates the creation
+of directory trees and file structures from a plain text file. It simplifies
+the management of complex directory structures, providing a clear and
+intuitive way to create, manipulate, and visualize them.
 
 Features
 ========
@@ -28,7 +44,7 @@ You can also clone the repository and install manually:
 
 .. code-block:: shell
 
-    git clone https://github.com/yourusername/arbor.git
+    git clone https://github.com/huell-howitzer/arbor.git
     cd arbor
     python setup.py install
 
@@ -69,14 +85,14 @@ License
 
 Arbor is released under the MIT License. See the `LICENSE`_ file for more details.
 
-.. _LICENSE: https://github.com/yourusername/arbor/blob/main/LICENSE
+.. _LICENSE: https://github.com/huell-howitzer/arbor/blob/main/LICENSE
 
 Documentation
 =============
 
 Detailed documentation is available in our `Sphinx docs`_.
 
-.. _Sphinx docs: https://yourusername.github.io/arbor/
+.. _Sphinx docs: https://huell-howitzer.github.io/arbor/
 
 Support
 =======
@@ -84,8 +100,6 @@ Support
 If you are having issues or have questions, you can:
 
 - Report issues on the GitHub `issue tracker`_.
-- Ask on `Stack Overflow`_ using the 'arbor' tag.
 
-.. _issue tracker: https://github.com/yourusername/arbor/issues
-.. _Stack Overflow: https://stackoverflow.com/questions/tagged/arbor
+.. _issue tracker: https://github.com/huell-howitzer/arbor/issues
 

@@ -1,20 +1,45 @@
+"""
+This module is the entry point for the Arbor application. It uses the Arbor module to generate a directory structure
+from a text file. The text file should be passed as a command line argument.
+
+.. _Google Python Style Guide:
+   https://google.github.io/styleguide/pyguide.html
+"""
+
 import sys
-from .directory_tree import DirectoryTree
+import argparse
+from rich.console import Console
+from arbor.directory_tree import DirectoryTree
+
+console = Console()
 
 
 def main():
-    # Command line arguments are available through the sys.argv list
-    # sys.argv[0] is the script name itself
-    # sys.argv[1] will be the command line argument you pass.
+    """
+    The main function of the Arbor application. It processes command line arguments, creates a DirectoryTree from a file,
+    and then creates the corresponding directory structure.
 
-    if len(sys.argv) != 2:
-        print("Usage: arbor <file>")
+    .. automethod:: arbor.main.main
+    """
+    parser = argparse.ArgumentParser(
+        description="Generate a directory structure from a text file."
+    )
+    parser.add_argument(
+        "file", type=str, help="The text file containing the directory structure"
+    )
+    args = parser.parse_args()
+
+    try:
+        tree = DirectoryTree.from_file(args.file)
+        tree.create()
+        console.print(
+            f"[green]Successfully created the directory structure from {args.file}![/green]"
+        )
+    except Exception as e:
+        console.print(
+            f"[red]An error occurred while creating the directory structure: {str(e)}[/red]"
+        )
         sys.exit(1)
-
-    filename = sys.argv[1]
-
-    tree = DirectoryTree.from_file(filename)
-    tree.create()
 
 
 if __name__ == "__main__":

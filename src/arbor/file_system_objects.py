@@ -8,6 +8,7 @@ This module provides classes representing generic filesystem objects, directorie
 """
 
 import os
+from arbor.file_system_objects import FileSystemObject
 
 
 class FileSystemObject:

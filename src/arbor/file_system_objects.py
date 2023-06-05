@@ -45,4 +45,4 @@ class File(FileSystemObject):
 
     def _create(self, path):
         """Create the file at the given path."""
-        open(path, 'w').close()
+        open(path, "w").close()

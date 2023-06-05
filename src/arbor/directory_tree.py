@@ -12,15 +12,22 @@ class DirectoryTree:
     def from_file(cls, filename):
         tree = cls()
 
-        with open(filename, 'r') as f:
+        with open(filename, "r") as f:
             lines = f.readlines()
 
         parents = [tree.root]
         for line in lines:
-            depth = line.count('|') + line.count('├') + line.count('└')
-            name = line.replace('|', '').replace('├', '').replace('└', '').replace('─', '').replace('/', '').strip()
+            depth = line.count("|") + line.count("├") + line.count("└")
+            name = (
+                line.replace("|", "")
+                .replace("├", "")
+                .replace("└", "")
+                .replace("─", "")
+                .replace("/", "")
+                .strip()
+            )
 
-            if '/' in line:  # This line represents a directory
+            if "/" in line:  # This line represents a directory
                 dir = Directory(name)
                 parents[depth].add(dir)
                 if depth + 1 < len(parents):

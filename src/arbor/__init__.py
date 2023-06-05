@@ -6,4 +6,3 @@ __email__ = "rmhowell@protonmail.com"
 
 from .directory_tree import DirectoryTree
 from .file_system_objects import File, Directory
-

@@ -8,7 +8,7 @@ def main():
     # sys.argv[1] will be the command line argument you pass.
 
     if len(sys.argv) != 2:
-        print('Usage: arbor <file>')
+        print("Usage: arbor <file>")
         sys.exit(1)
 
     filename = sys.argv[1]
@@ -17,5 +17,5 @@ def main():
     tree.create()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

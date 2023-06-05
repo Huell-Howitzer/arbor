@@ -7,6 +7,7 @@ This module contains unit tests for the DirectoryTree class in the arbor.directo
 
 import os
 import unittest
+import shutil
 from arbor.directory_tree import DirectoryTree
 
 TREE_STRUCTURE = """test_dir/
@@ -35,7 +36,7 @@ class TestDirectoryTree(unittest.TestCase):
         :return: None
         """
         if os.path.exists("test_dir"):
-            os.rmdir("test_dir")
+            shutil.rmtree("test_dir")
         if os.path.isfile(OUTPUT_FILENAME):
             os.remove(OUTPUT_FILENAME)
 

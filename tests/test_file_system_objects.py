@@ -99,5 +99,31 @@ class TestDirectory(unittest.TestCase):
         self.assertIn(child_file, self.directory.children)
 
 
+class File(FileSystemObject):
+    """
+    Represents a file, which is a type of filesystem object.
+
+    .. automethod:: arbor.file_system_objects.File._create
+    """
+
+    def _create(self, path):
+        """
+        Create the file at the given path.
+
+        :param path: The path where the file should be created.
+        :return: None
+        """
+        open(path, "a").close()
+
+    def delete(self):
+        """
+        Delete the file.
+
+        :return: None
+        """
+        if os.path.exists(self.name):
+            os.remove(self.name)
+
+
 if __name__ == "__main__":
     unittest.main()

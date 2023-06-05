@@ -11,13 +11,14 @@ Classes:
     TestDirectory: Test case for the Directory class.
 """
 
+import os
 import unittest
 
 from arbor.file_system_objects import Directory
 from arbor.file_system_objects import File
 
 TEST_FILE_NAME = "test.txt"
-TEST_DIRECTORY_NAME = "test_dir/"
+TEST_DIRECTORY_NAME = "test_dir"
 CHILD_FILE_NAME = "child.txt"
 
 
@@ -27,22 +28,33 @@ class TestFile(unittest.TestCase):
     the functionality of the `File` class found in the `arbor.file_system_objects` module.
 
     The `File` class represents a file object in a file system, and this test class
-    evaluates whether the `File` class correctly creates a file and whether it can delete it.
-
-    .. automethod:: setUp
-    .. automethod:: tearDown
-    .. automethod:: test_create
-    .. automethod:: test_delete
+    evaluates whether the `File` class correctly creates a file.
     """
 
     def setUp(self):
         """
         The `setUp` method is automatically called by the testing framework for each individual test.
-        ...
+        It creates an instance of `File` for testing.
         """
         self.file = File(TEST_FILE_NAME)
 
-    ...
+    def tearDown(self):
+        """
+        The `tearDown` method is automatically called by the testing framework after each test.
+        It removes the test directory and its content if they were created.
+        """
+        if os.path.exists(os.path.join(TEST_DIRECTORY_NAME, CHILD_FILE_NAME)):
+            os.remove(os.path.join(TEST_DIRECTORY_NAME, CHILD_FILE_NAME))
+
+        if os.path.exists(TEST_DIRECTORY_NAME):
+            os.rmdir(TEST_DIRECTORY_NAME)
+
+    def test_create(self):
+        """
+        Test that the `create` method correctly creates a file.
+        """
+        self.file.create(".")
+        self.assertTrue(os.path.exists(TEST_FILE_NAME))
 
 
 class TestDirectory(unittest.TestCase):
@@ -52,21 +64,39 @@ class TestDirectory(unittest.TestCase):
 
     The `Directory` class represents a directory in a file system, and this test class
     checks whether the `Directory` class correctly creates a directory and whether it can add child files.
-
-    .. automethod:: setUp
-    .. automethod:: tearDown
-    .. automethod:: test_create
-    .. automethod:: test_add_child
     """
 
     def setUp(self):
         """
-        The `setUp` method is used to set up any state that is shared across multiple tests. In this case,
-        ...
+        The `setUp` method is used to set up any state that is shared across multiple tests.
+        It creates an instance of `Directory` for testing.
         """
         self.directory = Directory(TEST_DIRECTORY_NAME)
 
-    ...
+    def tearDown(self):
+        """
+        The `tearDown` method is automatically called by the testing framework after each test.
+        It removes the test directory and its content if they were created.
+        """
+        if os.path.exists(TEST_DIRECTORY_NAME):
+            os.rmdir(TEST_DIRECTORY_NAME)
+        if os.path.exists(os.path.join(TEST_DIRECTORY_NAME, CHILD_FILE_NAME)):
+            os.remove(os.path.join(TEST_DIRECTORY_NAME, CHILD_FILE_NAME))
+
+    def test_create(self):
+        """
+        Test that the `create` method correctly creates a directory.
+        """
+        self.directory.create(".")
+        self.assertTrue(os.path.exists(TEST_DIRECTORY_NAME))
+
+    def test_add_child(self):
+        """
+        Test that the `add` method correctly adds a child file to the directory.
+        """
+        child_file = File(CHILD_FILE_NAME)
+        self.directory.add(child_file)
+        self.assertIn(child_file, self.directory.children)
 
 
 if __name__ == "__main__":

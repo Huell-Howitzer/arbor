@@ -16,6 +16,7 @@ import unittest
 
 from arbor.file_system_objects import Directory
 from arbor.file_system_objects import File
+from arbor.file_system_objects import FileSystemObject
 
 TEST_FILE_NAME = "test.txt"
 TEST_DIRECTORY_NAME = "test_dir"
@@ -41,13 +42,10 @@ class TestFile(unittest.TestCase):
     def tearDown(self):
         """
         The `tearDown` method is automatically called by the testing framework after each test.
-        It removes the test directory and its content if they were created.
+        It removes the test file if it was created.
         """
-        if os.path.exists(os.path.join(TEST_DIRECTORY_NAME, CHILD_FILE_NAME)):
-            os.remove(os.path.join(TEST_DIRECTORY_NAME, CHILD_FILE_NAME))
-
-        if os.path.exists(TEST_DIRECTORY_NAME):
-            os.rmdir(TEST_DIRECTORY_NAME)
+        if os.path.exists(TEST_FILE_NAME):
+            os.remove(TEST_FILE_NAME)
 
     def test_create(self):
         """
@@ -55,6 +53,14 @@ class TestFile(unittest.TestCase):
         """
         self.file.create(".")
         self.assertTrue(os.path.exists(TEST_FILE_NAME))
+
+    def test_delete(self):
+        """
+        Test that the `delete` method correctly deletes a file.
+        """
+        self.file.create(".")
+        self.file.delete(".")
+        self.assertFalse(os.path.exists(TEST_FILE_NAME))
 
 
 class TestDirectory(unittest.TestCase):
@@ -78,10 +84,11 @@ class TestDirectory(unittest.TestCase):
         The `tearDown` method is automatically called by the testing framework after each test.
         It removes the test directory and its content if they were created.
         """
-        if os.path.exists(TEST_DIRECTORY_NAME):
-            os.rmdir(TEST_DIRECTORY_NAME)
         if os.path.exists(os.path.join(TEST_DIRECTORY_NAME, CHILD_FILE_NAME)):
             os.remove(os.path.join(TEST_DIRECTORY_NAME, CHILD_FILE_NAME))
+
+        if os.path.exists(TEST_DIRECTORY_NAME):
+            os.rmdir(TEST_DIRECTORY_NAME)
 
     def test_create(self):
         """
@@ -113,16 +120,29 @@ class File(FileSystemObject):
         :param path: The path where the file should be created.
         :return: None
         """
-        open(path, "a").close()
+        with open(path, "a") as f:
+            f.close()
 
-    def delete(self):
+    def create(self, directory_path):
+        """
+        Create the file.
+
+        :param directory_path: The directory where the file should be created.
+        :return: None
+        """
+        full_path = os.path.join(directory_path, self.name)
+        self._create(full_path)
+
+    def delete(self, directory_path):
         """
         Delete the file.
 
+        :param directory_path: The directory where the file should be deleted from.
         :return: None
         """
-        if os.path.exists(self.name):
-            os.remove(self.name)
+        full_path = os.path.join(directory_path, self.name)
+        if os.path.exists(full_path):
+            os.remove(full_path)
 
 
 if __name__ == "__main__":

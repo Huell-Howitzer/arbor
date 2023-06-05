@@ -1,5 +1,3 @@
-# file_system_objects.py
-
 """
 This module provides classes representing generic filesystem objects, directories, and files.
 
@@ -8,7 +6,6 @@ This module provides classes representing generic filesystem objects, directorie
 """
 
 import os
-from arbor.directory_tree import DirectoryTree
 
 
 class FileSystemObject:
@@ -118,3 +115,12 @@ class File(FileSystemObject):
         :return: None
         """
         open(path, "a").close()
+
+    def delete(self, path):
+        """
+        Delete the file at the given path.
+
+        :param path: The path where the file should be deleted.
+        :return: None
+        """
+        os.remove(path)

@@ -66,9 +66,9 @@ class TestFile(unittest.TestCase):
 
         .. automethod:: arbor.file_system_objects.File.delete
         """
-        self.file.create(".")
-        self.file.delete()
-        self.assertFalse(os.path.isfile(TEST_FILE_NAME))
+        path = self.file.create(".")
+        self.file.delete(path)
+        self.assertFalse(os.path.isfile(path))
 
 
 class TestDirectory(unittest.TestCase):

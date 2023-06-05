@@ -1,0 +1,18 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "arbor"
+version = "0.1.0"
+description = "Create directory structures from output of tree command"
+authors = ["Ryan M. Howell <rmhowell@protonmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+blackbox = "^21.8b0"
+bump2version = "^1.0.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2"
